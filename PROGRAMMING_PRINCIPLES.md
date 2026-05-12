@@ -6,15 +6,15 @@
 Внутрішній стан об'єктів прихований від прямого втручання ззовні, а доступ до нього здійснюється через контрольовані властивості (properties) та публічні методи.
 * **Приклад:** У класі `Player` константи фізики (`gravity`, `jumpStrength`), а також ресурси для анімації (`originalImage`, `rotationFrames`) зроблені приватними (`private`). Керування станом гравця відбувається через методи `Jump()` та `ApplyGravity()`. 
 * Крім того, у класі `Obstacle` властивість `Box` має модифікатор `protected set`, що забороняє її зміну ззовні, але дозволяє налаштування у класах-нащадках.
-* **Посилання на код:** * [GameLogic/Player.cs (приватні поля)](https://github.com/ipz244mbv-commits/KPZ1/blob/main/GameLogic/Player.cs)
-  * [GameLogic/Obstacle.cs (protected set)](https://github.com/ipz244mbv-commits/KPZ1/blob/main/GameLogic/Obstacle.cs)
+* **Посилання на код:** * [GameLogic/Player.cs (приватні поля)](https://github.com/ipz244mbv-commits/KPZ1/blob/master/GameLogic/Player.cs)
+  * [GameLogic/Obstacle.cs (protected set)](https://github.com/ipz244mbv-commits/KPZ1/blob/master/GameLogic/Obstacle.cs)
 
 ## 2. Наслідування (Inheritance)
 Проєкт використовує ієрархію класів для уникнення дублювання коду та створення спеціалізованих об'єктів на базі загальних.
 * **Приклад:** Клас `Spike` наслідується від базового класу `Obstacle` (`public class Spike : Obstacle`). Він отримує властивість `Box` від батьківського класу, але в конструкторі доповнює її унікальною логікою: задає прозорий фон, розраховує позицію на платформі та додає власне відмальовування трикутника через подію `Paint`.
-* **Посилання на код:** [GameLogic/Spike.cs (наслідування та виклик base)](https://github.com/ipz244mbv-commits/KPZ1/blob/main/GameLogic/Spike.cs)
+* **Посилання на код:** [GameLogic/Spike.cs (наслідування та виклик base)](https://github.com/ipz244mbv-commits/KPZ1/blob/master/GameLogic/Spike.cs)
 
 ## 3. Принцип єдиної відповідальності (Single Responsibility Principle - SRP)
 Кожен клас відповідає за свою вузьку задачу, що робить код модульним і легким для підтримки.
 * **Приклад:** Клас `Player` не займається відмальовуванням всього ігрового поля чи перевіркою зіткнень з іншими об'єктами. Його відповідальність зведена до розрахунку власної фізики (гравітація, стрибок) та управління власною анімацією (обчислення кута повороту в методі `PrecomputeRotations()`). За візуальне представлення перешкод відповідають виключно класи перешкод.
-* **Посилання на код:** [GameLogic/Player.cs (методи фізики та анімації)](https://github.com/ipz244mbv-commits/KPZ1/blob/main/GameLogic/Player.cs)
+* **Посилання на код:** [GameLogic/Player.cs (методи фізики та анімації)](https://github.com/ipz244mbv-commits/KPZ1/blob/master/GameLogic/Player.cs)
