@@ -137,18 +137,9 @@ namespace Geometry_Dash
                     Rectangle expandedPortal = tp.Box.Bounds;
                     expandedPortal.Inflate(5, 5);
 
-                    if (!wasInPortal && expandedPortal.IntersectsWith(player.Box.Bounds))
+                 if (!wasInPortal && expandedPortal.IntersectsWith(player.Box.Bounds))
                     {
-                        MessageBox.Show("-> Готові викликати метод");
-                        try
-                        {
-                            DebugTeleportPlayer(tp);
-                            MessageBox.Show("✔ Метод викликаний без помилок");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"❌ Виняток: {ex.Message}");
-                        }
+                        DebugTeleportPlayer(tp);
                     }
 
                 }
@@ -197,9 +188,6 @@ namespace Geometry_Dash
                 player.IsGrounded = true;
                 player.VelocityY = 0;
 
-                MessageBox.Show(
-                $"STOP at ceiling\nTop = {player.Box.Top}, Velocity = {player.VelocityY}"
-                );
 
             }
             if (tickCounter % 200 == 0)
@@ -283,14 +271,10 @@ namespace Geometry_Dash
             return Math.Clamp(percent, 0, 100);
         }
 
-        private void DebugTeleportPlayer(TeleportPortal tp)
+     private void DebugTeleportPlayer(TeleportPortal tp)
         {
             try
             {
-                MessageBox.Show("🟡 Увійшли в TeleportPlayer");
-
-                this.BackColor = Color.LimeGreen; // ⬅️ Робимо форму зеленою
-
                 player.Box.Left = tp.Destination.X;
 
                 if (tp.InvertGravityAfterTeleport)
@@ -302,21 +286,17 @@ namespace Geometry_Dash
                 player.IsGrounded = true;
                 wasInPortal = true;
 
-                player.Box.BackColor = Color.Red;
                 player.Box.Visible = true;
                 player.Box.BringToFront();
 
                 if (player.Box.Parent == null)
                 {
                     this.Controls.Add(player.Box);
-                    MessageBox.Show("Box був відсутній, додано знову");
                 }
-
-                MessageBox.Show("🟢 Вийшли з TeleportPlayer");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"❌ Виняток усередині методу: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Виняток при телепортації: {ex.Message}");
             }
         }
 
